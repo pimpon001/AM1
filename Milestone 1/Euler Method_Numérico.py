@@ -1,6 +1,6 @@
 # %%
 import matplotlib.pyplot as plt
-from numpy import array, zeros
+from numpy import array, zeros, sin, cos, pi
 
 # Modelo físico: oscilador armónico simple sin amortiguamiento.
 # La variable U = [x, v] representa posición x y velocidad v.
@@ -12,10 +12,10 @@ from numpy import array, zeros
 
 def F(U):
     # Derivada del estado U = [x, v]
-    return array([U[1], -U[0]])
+    return array([U[1], -sin(U[0])])  # Usamos sin(x) para un oscilador no lineal, o -x para lineal
 
 # Número de pasos de tiempo
-N = 100000
+N = 40000
 # Paso de integración (tiempo discreto)
 At = 0.01
 # Número de variables del estado

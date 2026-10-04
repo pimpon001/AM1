@@ -1,3 +1,4 @@
+# %%
 from numpy import array, zeros
 import matplotlib.pyplot as plt
 
@@ -23,3 +24,5 @@ plt.title('Cauchy Problem')
 plt.grid()
 plt.axis('equal')
 plt.show()
+
+# %%
