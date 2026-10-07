@@ -1,8 +1,4 @@
 #%%
-import os
-print(os.getcwd())
-print(os.listdir())
-#%%
 from ErrorFunction import Plot_Error
 from numpy.linalg import norm
 import matplotlib.pyplot as plt
