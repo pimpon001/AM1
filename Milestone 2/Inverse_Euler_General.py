@@ -18,3 +18,10 @@ def inverse_euler(F, U0, At, N, tol, itmax):
         U[n + 1, :] = U_new
        
     return U
+
+    plt.plot(U[:, 0], U[:, 1])
+    plt.axis('equal')
+    plt.xlabel('Posición x')
+    plt.ylabel('Velocidad v')
+    plt.title('Órbita del oscilador armónico simple')
+    plt.show()

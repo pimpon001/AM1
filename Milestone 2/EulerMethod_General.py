@@ -12,3 +12,10 @@ def Euler_Method(F, U0, At, N):
         U[n + 1, :] = U[n, :] + At * F(U[n, :])
 
     return U    
+
+    plt.plot(U[:, 0], U[:, 1])
+    plt.axis('equal')
+    plt.xlabel('Posición x')
+    plt.ylabel('Velocidad v')
+    plt.title('Órbita del oscilador armónico simple')
+    plt.show()

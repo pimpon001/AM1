@@ -44,6 +44,6 @@ def Cauchy_Problem(F, U0, At, N, tol, itmax):
     plt.grid()
     plt.show()
 
-    # Plot error comparison
-    Plot_Error(At, Uex, [U_Euler, U_Crank_Nicolson, U_Runge_Kutta4], ['Euler', 'Crank-Nicolson', 'Runge-Kutta 4'])
-# %%
+Cauchy_Problem(F, U0, At, N, tol, itmax)
+Plot_Error(At, Uex, [U_Euler, U_Crank_Nicolson, U_Runge_Kutta4], ['Euler', 'Crank-Nicolson', 'Runge-Kutta 4'])
+

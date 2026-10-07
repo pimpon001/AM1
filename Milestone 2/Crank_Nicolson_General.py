@@ -22,3 +22,9 @@ def Crank_Nicolson(F, U0, At, N, tol, itmax):
 
     return U
 
+    plt.plot(U[:, 0], U[:, 1])
+    plt.axis('equal')
+    plt.xlabel('Posición x')
+    plt.ylabel('Velocidad v')
+    plt.title('Órbita del oscilador armónico simple')
+    plt.show()
