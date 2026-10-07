@@ -1,11 +1,16 @@
 #%%
+import os
+print(os.getcwd())
+print(os.listdir())
+#%%
+from ErrorFunction import Plot_Error
 from numpy.linalg import norm
 import matplotlib.pyplot as plt
 from numpy import array, arange, cos, sin, zeros
 
 N = 10000
 # Paso de integración (tiempo discreto)
-At = 0.0001
+At = 0.01
 # Número de variables del estado
 Nv = 2
 
@@ -21,6 +26,9 @@ UCN[0, :] = array([1, 0])
 
 E= UCN.copy() #Copia de la matriz para almacenar los resultados del método de Euler
 E[0, :] = array([1, 0])
+
+URK4= zeros((N + 1, Nv))
+URK4[0, :] = array([1, 0])
 
 tol=1e-6  
 itmax=100  
@@ -41,25 +49,13 @@ for n in range(0, N):
 
     UCN[n + 1, :] = UEuler_new
 
+for n in range(0,N):
+    k1 = At * F(URK4[n,:])
+    k2 = At * F(URK4[n,:] + 0.5 * k1)
+    k3 = At * F(URK4[n,:] + 0.5 * k2)
+    k4 = At * F(URK4[n,:] + k3)
+    URK4[n+1,:] = URK4[n,:] + (k1 + 2*k2 + 2*k3 + k4) / 6
 
-def Plot_Error(At, Uex, Us, labels):
-    # Dt: paso de tiempo
-    # Uex: solución exacta, array (N+1, Nv)
-    # Us: lista de soluciones numéricas, cada una (N+1, Nv)
-    # labels: lista de nombres, uno por solución
-    N = Uex.shape[0] - 1
-    t = arange(N + 1) * At
-
-    plt.figure()
-    for U, lab in zip(Us, labels):
-        err = norm(U - Uex, axis=1)            # error en cada instante
-        plt.semilogy(t[1:], err[1:], label=lab)  # escala log; se omite t=0
-
-    plt.xlabel('t')
-    plt.ylabel('||U - U_exacta||')
-    plt.title('Error frente al tiempo')
-    plt.grid(which='both', alpha=0.4)
-    plt.legend()
 
 def Plot_Diferencia(At, U1, U2, label1='Euler', label2='Crank-Nicolson'):
     # At: paso de tiempo
@@ -76,7 +72,8 @@ def Plot_Diferencia(At, U1, U2, label1='Euler', label2='Crank-Nicolson'):
     plt.title(f'Diferencia entre {label1} y {label2}')
     plt.grid(which='both', alpha=0.4)
 
-Plot_Error(At, Uex, [E, UCN], ['Euler', 'Crank-Nicolson'])
+Plot_Error(At, Uex, [E, UCN, URK4], ['Euler', 'Crank-Nicolson', 'Runge-Kutta 4'])
 Plot_Diferencia(At, E, UCN)
+Plot_Diferencia(At, UCN, URK4, 'Crank-nicolson', 'Runge-Kutta 4')
 plt.show()
 # %%

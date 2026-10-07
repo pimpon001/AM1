@@ -11,6 +11,7 @@ def Plot_Error(At, Uex, Us, labels):
     N = Uex.shape[0] - 1
     t = arange(N + 1) * At
 
+    #if __name__ == '__main__':
     plt.figure()
     for U, lab in zip(Us, labels):
         err = norm(U - Uex, axis=1)            # error en cada instante
