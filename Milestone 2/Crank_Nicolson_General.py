@@ -2,29 +2,10 @@
 import matplotlib.pyplot as plt
 from numpy import array, zeros, sin, cos, pi
 
-def Crank_Nicolson(F, U0, At, N, tol, itmax):
-    Nv = len(U0)
-    U = zeros((N + 1, Nv))
-    U[0, :] = U0
+def crank_nicholson(F, U, At, t):
+    def G(X):
+        return X-U-0.5*At*(F(U, t)+F(X, t+At))
 
-    for n in range(N):
-        Fn = F(U[n, :])
-        E = U[n, :] + At * Fn  # Predicción usando Euler
-
-        for k in range(itmax):
-            Fk = F(E)
-            E_new = U[n, :] + (At / 2) * (Fn + Fk)  # Actualización usando Crank-Nicolson
-            if abs(E_new - E).max() < tol:
-                break
-            E = E_new
-
-        U[n + 1, :] = E_new
-
-    return U
-
-    plt.plot(U[:, 0], U[:, 1])
-    plt.axis('equal')
-    plt.xlabel('Posición x')
-    plt.ylabel('Velocidad v')
-    plt.title('Órbita del oscilador armónico simple')
-    plt.show()
+    # Use Newton's method to solve for the next time step
+    from scipy.optimize import newton
+    return newton(func=G, x0=U)
