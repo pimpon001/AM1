@@ -1,6 +1,8 @@
 from numpy import array, zeros, sin, cos, pi
 import matplotlib.pyplot as plt
-from scipy.optimize import newton 
+from scipy.optimize import newton
+import Schemes
+from Schemes import cauchy_problem, Runge_Kutta4, inverse_euler, Euler_Method, crank_nicholson
 
 def Oscilador(U,t):
     return array([U[1], -U[0]])
