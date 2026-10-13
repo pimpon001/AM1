@@ -19,6 +19,14 @@ plt.axis('equal')
 plt.grid(True)
 plt.show()
 
+U = cauchy_problem(F=Oscilador, U0=array([1, 0]), t= partition(a=0, b=10, N=100), scheme = inverse_euler)
+plt.plot(U[:, 0], U[:, 1])
+plt.title("Método de Euler Inverso")
+plt.axis('equal')
+plt.grid(True)
+plt.show()
+
+
 U = cauchy_problem( F = Oscilador, U0 = array([1, 0]), t = partition(a=0, b=10, N=100), scheme = Runge_Kutta4)
 
 plt.plot(U[:, 0], U[:, 1])
