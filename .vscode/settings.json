@@ -1,5 +1,12 @@
 {
     "python.analysis.extraPaths": [
         "./Milestone 2"
+    ],
+    "python-envs.pythonProjects": [
+        {
+            "path": ".",
+            "envManager": "ms-python.python:system",
+            "packageManager": "ms-python.python:pip"
+        }
     ]
 }
